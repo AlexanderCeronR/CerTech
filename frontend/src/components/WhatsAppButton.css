@@ -1,0 +1,31 @@
+.whatsapp-button {
+  position: fixed;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 19;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 4px 18px rgb(0 0 0 / 22%);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.whatsapp-button svg { width: 30px; height: 30px; }
+.whatsapp-button:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+@media (hover: hover) {
+  .whatsapp-button:hover { transform: translateY(-3px); box-shadow: 0 7px 22px rgb(0 0 0 / 28%); }
+}
+/* Reserve the right-hand rail so contact controls cannot sit behind the button. */
+.contact-form-wrap { margin-right: 76px; }
+.site-footer { padding-bottom: 88px; }
+@media (max-width: 680px) {
+  .whatsapp-button { right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); }
+  .contact-form-wrap { margin-right: 52px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-button { transition: none; }
+  .whatsapp-button:hover { transform: none; }
+}
