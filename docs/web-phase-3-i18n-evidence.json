@@ -1,0 +1,162 @@
+{
+  "phase": "Web Phase 3 — i18n",
+  "checkedAt": "2026-10-22T03:56:42.632Z",
+  "preview": "http://127.0.0.1:4183/",
+  "branch": "security/phase-1-hardening",
+  "isolation": "/private/tmp/certech-i18n-phase3/work",
+  "catalogs": {
+    "languages": [
+      "es",
+      "en",
+      "fr"
+    ],
+    "keysEach": 205,
+    "totalStrings": 615
+  },
+  "tests": {
+    "automated": {
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0
+    },
+    "productionBuild": "Vite 6.4.5 — passed",
+    "buildGuards": "Missing, HTTP and unapproved API rejected; approved exact HTTPS passed; canaries absent",
+    "dist": "4 artifacts; no secret signatures/canaries or sourcemaps",
+    "http": "Loopback fixtures 201/400/503; headers/assets/404 protections passed",
+    "static": {
+      "tool": "Semgrep OSS core 1.99.0",
+      "localRules": 6,
+      "files": 37,
+      "findings": 0,
+      "errors": 0
+    },
+    "secrets": {
+      "tool": "Gitleaks 8.30.1",
+      "files": 112,
+      "findings": 0
+    }
+  },
+  "browser": {
+    "engine": "Codex in-app browser",
+    "languages": [
+      "es",
+      "en",
+      "fr"
+    ],
+    "viewports": [
+      [
+        1280,
+        720
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        320,
+        640
+      ],
+      [
+        768,
+        1024
+      ]
+    ],
+    "preferenceRecoveredAfterReload": "fr",
+    "storageDenied": "unit-tested with injected exceptions; real browser settings unchanged",
+    "formPreservedFields": [
+      "nombre",
+      "correo",
+      "empresa",
+      "servicio",
+      "presupuesto",
+      "descripcion",
+      "aceptaPrivacidad"
+    ],
+    "sectionShiftPixels": -0.2421875,
+    "keyboard": [
+      "native selector typeahead + Enter",
+      "mobile menu Enter",
+      "consent Space"
+    ],
+    "cspInlineProbe": "Title stayed CSP probe",
+    "consoleUnexpectedErrors": 0,
+    "mora320": {
+      "cardWidth": 284,
+      "artWidth": 282,
+      "panelWidth": 250,
+      "contained": true
+    },
+    "screenshots": [
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/en-desktop.png",
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/en-mobile.png",
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/es-desktop.png",
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/es-mobile.png",
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/fr-320.png",
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/fr-contact-320.png",
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/fr-desktop.png",
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/fr-mobile.png",
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/fr-mora-320.png",
+      "/Users/pedroveras/.codex/visualizations/2026/10/22/01a16134-b61f-7a31-ad4e-d923594b23ad/certech-i18n-phase3/fr-tablet.png"
+    ]
+  },
+  "scope": {
+    "backendModified": false,
+    "databaseStarted": false,
+    "realEmailSent": false,
+    "dependencyChanges": false,
+    "commits": false,
+    "push": false,
+    "merge": false,
+    "deployment": false
+  },
+  "pending": [
+    "Client-side metadata only; no separate language URLs or SSR",
+    "Physical devices and other browser engines not tested",
+    "Previous hosting, security and real SMTP approval tasks remain separate"
+  ],
+  "verdict": "APROBADO LOCALMENTE — frontend i18n only",
+  "preservation": {
+    "baselineFiles": 100,
+    "existingModified": 9,
+    "priorFilesUntouched": 91,
+    "backendUnchanged": true,
+    "cspUnchanged": true,
+    "lockfileUnchanged": true,
+    "noConcurrentChanges": true
+  },
+  "files": [
+    "frontend/index.html",
+    "frontend/src/main.jsx",
+    "frontend/src/App.jsx",
+    "frontend/src/components/ContactForm.jsx",
+    "frontend/src/components/ProjectCard.jsx",
+    "frontend/src/components/WhatsAppButton.jsx",
+    "frontend/src/data/site.js",
+    "frontend/src/services/contactService.js",
+    "frontend/src/services/contactService.test.js",
+    "frontend/src/components/LanguageSelector.jsx",
+    "frontend/src/styles/i18n.css",
+    "frontend/security/i18n-source.test.mjs",
+    "docs/web-phase-3-i18n.md",
+    "docs/web-phase-3-i18n-evidence.json",
+    "frontend/src/i18n/I18nProvider.jsx",
+    "frontend/src/i18n/contactFeedback.js",
+    "frontend/src/i18n/core.js",
+    "frontend/src/i18n/i18n.test.js",
+    "frontend/src/i18n/locales/en.json",
+    "frontend/src/i18n/locales/es.json",
+    "frontend/src/i18n/locales/fr.json"
+  ],
+  "githubPublication": {
+    "branch": "codex/i18n-es-en-fr",
+    "parent": "7c9cf981521d0a9aad056f814b844ab5ecd497b5",
+    "standaloneTests": {
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0
+    },
+    "build": "Vite 6.4.5 passed",
+    "scope": "i18n frontend files and report; prior security configuration, CI, backend mail and migrations excluded",
+    "localValidationAbove": "Historical evidence from full local working copy; not all security configuration files are in this branch"
+  }
+}
