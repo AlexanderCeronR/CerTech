@@ -18,3 +18,9 @@
 @media(max-width:380px){.project-art-mora{min-height:240px}.mora-art-panels>div{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:4px}.mora-art-panels small{grid-column:auto}}
 /* A min-height must not transfer an aspect-ratio minimum width beyond the card. */
 .project-art{width:100%;max-width:100%;min-width:0}
+
+.site-footer .development-credit{margin:24px 76px 0 0;color:#9aaabd;font-size:12px;line-height:1.8;letter-spacing:.01em}
+.site-footer .development-credit a{display:inline-block;color:#d5e4ef;font-family:Manrope,sans-serif;font-weight:700;letter-spacing:.035em;text-decoration:underline;text-decoration-color:#52677e;text-underline-offset:4px;padding:8px 2px}
+.site-footer .development-credit a:hover{color:#6ed1fa;text-decoration-color:currentColor}
+.site-footer .development-credit a:focus-visible{outline:2px solid #6ed1fa;outline-offset:4px;border-radius:2px}
+@media(max-width:680px){.site-footer .development-credit{max-width:270px;margin-right:64px;font-size:11px}}

@@ -1,0 +1,15 @@
+.founder-section{padding:80px 0;background:#101b2c;color:#f4f7fb;border-bottom:1px solid #253247;scroll-margin-top:110px}
+.founder-layout{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:80px}
+.founder-portrait{position:relative;width:100%;max-width:340px;margin:0 auto;padding:8px;border:1px solid #3a4e65;border-radius:20px;background:#1b2a3e;box-shadow:0 24px 60px #0004}
+.founder-portrait:before{content:"";position:absolute;top:-1px;left:32px;right:32px;height:2px;background:#38bdf8}
+.founder-portrait img{display:block;width:100%;height:auto;aspect-ratio:3/4;border-radius:12px}
+.founder-copy{min-width:0;max-width:560px}
+.founder-copy .eyebrow{color:#6ed1fa}
+.founder-copy h2{margin:0 0 28px;font-size:clamp(30px,3.5vw,46px);line-height:1.14;letter-spacing:-1.6px;color:#f4f7fb}
+.founder-identity{padding-left:20px;border-left:2px solid #38bdf8;margin-bottom:24px}
+.founder-identity h3{font-family:Manrope,sans-serif;font-size:26px;letter-spacing:-.6px;margin:0 0 6px;color:#fff}
+.founder-identity p{font-size:14px;color:#92c9e2;margin:0}
+.founder-introduction{font-size:16px;line-height:1.85;color:#b8c6d8;margin:0 0 30px}
+.founder-copy .button{white-space:normal;text-align:center;min-height:48px}
+@media(max-width:900px){.founder-layout{gap:40px}.founder-copy h2{font-size:34px}}
+@media(max-width:680px){.founder-section{padding:64px 0;scroll-margin-top:88px}.founder-layout{grid-template-columns:minmax(0,1fr);gap:40px}.founder-portrait{max-width:300px}.founder-copy{max-width:none}.founder-copy h2{font-size:34px;letter-spacing:-1.2px}.founder-identity h3{font-size:25px}}

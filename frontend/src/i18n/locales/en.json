@@ -203,5 +203,13 @@
   "privacy.link": "Privacy policy",
   "privacy.body": "The information you submit through this form is used to record and respond to your contact request. The form asks for your name, email address, service of interest and project description; company and budget are optional. Do not submit sensitive information. For questions about submitted information, use the contact form and describe your request.",
   "whatsapp.label": "Contact us on WhatsApp",
-  "whatsapp.message": "Hello, I'm interested in CerTech's services. I'd like more information."
+  "whatsapp.message": "Hello, I'm interested in CerTech's services. I'd like more information.",
+  "founder.eyebrow": "Meet CerTech",
+  "founder.heading": "Meet our founder",
+  "founder.role": "Founder of CerTech",
+  "founder.introduction": "CerTech is built around a clear idea: bringing technology closer to the real needs of each business. Let’s talk about what you want to build and explore the next step.",
+  "founder.alt": "Alexander Ceron, founder of CerTech",
+  "founder.name": "Alexander Ceron",
+  "footer.development": "Developed in collaboration with",
+  "footer.developmentBrand": "Morel Tech"
 }

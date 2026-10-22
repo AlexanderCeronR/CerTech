@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowDownRight, ArrowRight, Menu, X, Workflow, Bot, Cable, FileSearch, Check, Sparkles, Code2, ShieldCheck, Layers3, HeartHandshake, ChevronRight } from 'lucide-react';
 import { services, projects } from './data/site.js';
 import ContactForm from './components/ContactForm.jsx';
+import FounderSection from './components/FounderSection.jsx';
 import ProjectCard from './components/ProjectCard.jsx';
 import WhatsAppButton from './components/WhatsAppButton.jsx';
 import LanguageSelector from './components/LanguageSelector.jsx';
@@ -60,6 +61,7 @@ export default function App() {
       <section className="about-section section" id="nosotros"><div className="container about-layout"><div className="about-title"><p className="eyebrow">{t('about.eyebrow')}</p><h2>{t('about.title')} <span>{t('about.titleAccent')}</span></h2><p>{t('about.description')}</p><a href="#contacto" className="text-link">{t('actions.talk')} <ArrowRight size={15} /></a></div>
         <div className="approach-list">{approach.map((key, i) => <div className="approach-item" key={key}><span>0{i + 1}</span><p>{t(`about.steps.${key}`)}</p><ChevronRight size={17}/></div>)}</div>
       </div></section>
+      <FounderSection />
       <section className="why-section section"><div className="container"><div className="compact-heading"><p className="eyebrow">{t('why.eyebrow')}</p><h2>{t('why.title')}<br /><span>{t('why.titleAccent')}</span></h2></div>
         <div className="reason-grid">{reasons.map(([Icon, key]) => <article className="reason-card" key={key}><span><Icon size={20}/></span><h3>{t(`why.${key}.title`)}</h3><p>{t(`why.${key}.body`)}</p></article>)}</div>
         <div className="methodology"><div className="method-title"><p className="eyebrow">{t('method.eyebrow')}</p><h3>{t('method.title')}</h3></div>{methods.map((key, i) => <article className="method-step" key={key}><span>0{i + 1}</span><h4>{t(`method.${key}.title`)}</h4><p>{t(`method.${key}.body`)}</p></article>)}</div>
@@ -72,6 +74,7 @@ export default function App() {
     </main>
     <footer className="site-footer"><div className="container"><div className="footer-main"><div className="footer-brand"><Logo /><p>{t('footer.description')}</p></div><div className="footer-col"><b>{t('footer.explore')}</b>{nav.map(([key, href]) => <a href={href} key={href}>{t(`nav.${key}`)}</a>)}</div><div className="footer-col footer-services"><b>{t('nav.services')}</b>{services.map(({ slug }) => <a href={`#servicio-${slug}`} key={slug}>{t(`services.${slug}.title`)}</a>)}</div></div>
       <details className="privacy-note" id="privacidad"><summary>{t('privacy.summary')}</summary><p>{t('privacy.body')}</p></details><div className="footer-bottom"><span>© {new Date().getFullYear()} CerTech. {t('footer.rights')}</span><a href="#privacidad">{t('privacy.link')}</a><span className="footer-location">{t('footer.location')}</span></div>
+      <p className="development-credit">{t('footer.development')} <a href="https://moreltech.dev" target="_blank" rel="noopener noreferrer">{t('footer.developmentBrand')}</a></p>
     </div></footer>
     <WhatsAppButton />
   </>;
