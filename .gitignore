@@ -1,0 +1,68 @@
+# Installed dependencies and generated build output
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+target/
+**/target/
+build/
+**/build/
+coverage/
+**/coverage/
+
+# Local environment and secret material
+.env
+.env.*
+!.env.example
+!**/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Logs, temporary files, and caches
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.cache/
+**/.cache/
+.sass-cache/
+**/.pytest_cache/
+**/__pycache__/
+**/.vite/
+**/tmp/
+**/temp/
+
+# Local IDE and operating system files
+.idea/
+.vscode/
+.DS_Store
+**/.DS_Store
+Thumbs.db
+**/Thumbs.db
+Desktop.ini
+**/Desktop.ini
+
+# Backups and database exports (keep source SQL migrations versionable)
+*.bak
+*.backup
+*.old
+*.dump
+*.dump.gz
+*.sql.gz
+*.sql.zip
+*.db
+*.sqlite
+*.sqlite3
+
+# Private keys and keystores; public certificate files remain eligible
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+**/secrets/
+**/credentials/
