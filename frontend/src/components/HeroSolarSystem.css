@@ -1,0 +1,164 @@
+.hero-visual.solar-system {
+  isolation: isolate;
+  overflow: visible;
+}
+
+.solar-ring {
+  position: absolute;
+  z-index: 0;
+  width: min(var(--ring-size), 100%);
+  aspect-ratio: 1;
+  border: 1px solid rgba(99, 144, 193, 0.16);
+  border-radius: 50%;
+  box-shadow: inset 0 0 24px rgba(56, 189, 248, 0.018), 0 0 20px rgba(56, 189, 248, 0.025);
+  pointer-events: none;
+}
+
+.solar-ring-near { --ring-size: 230px; }
+.solar-ring-mid { --ring-size: 350px; border-color: rgba(56, 189, 248, 0.13); }
+.solar-ring-far { --ring-size: 410px; border-color: rgba(99, 144, 193, 0.11); }
+
+.solar-core {
+  position: relative;
+  z-index: 2;
+  border-color: rgba(103, 192, 233, 0.72);
+  background: radial-gradient(circle at 34% 28%, #284665 0, #142940 48%, #0b1524 100%);
+  box-shadow: 0 0 0 10px rgba(56, 189, 248, 0.035), 0 0 30px rgba(56, 189, 248, 0.24), 0 0 88px rgba(56, 189, 248, 0.13);
+}
+
+.solar-core::before,
+.solar-core::after {
+  content: '';
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.solar-core::before {
+  inset: -8px;
+  border: 1px solid rgba(105, 211, 255, 0.16);
+}
+
+.solar-core::after {
+  inset: 13px;
+  border: 1px solid rgba(105, 211, 255, 0.08);
+}
+
+.solar-orbiting-planet {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: min(var(--orbit-size), 100%);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.solar-planet {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: default;
+  outline: none;
+  pointer-events: auto;
+}
+
+.solar-planet-face {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid color-mix(in srgb, var(--planet-color) 78%, white 22%);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 68% 66%, transparent 0 17%, rgba(4, 12, 24, 0.25) 18% 25%, transparent 27%),
+    radial-gradient(ellipse at 35% 59%, color-mix(in srgb, var(--planet-color) 68%, #142237 32%) 0 12%, transparent 13%),
+    radial-gradient(circle at 30% 25%, #fff 0, color-mix(in srgb, var(--planet-color) 82%, white 18%) 12%, var(--planet-color) 42%, color-mix(in srgb, var(--planet-color) 55%, #071426 45%) 72%, #07101e 100%);
+  box-shadow: 0 0 7px color-mix(in srgb, var(--planet-color) 62%, transparent), 0 0 14px color-mix(in srgb, var(--planet-color) 34%, transparent), inset -2px -2px 4px rgba(3, 11, 21, 0.6);
+  transform: scale(1);
+  transition: transform 260ms cubic-bezier(0.2, 0.75, 0.25, 1), box-shadow 260ms ease;
+}
+
+.solar-planet-face::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 4px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+  filter: blur(1px);
+  transform: rotate(-28deg);
+}
+
+.solar-planet-label {
+  position: absolute;
+  top: calc(100% + 9px);
+  left: 50%;
+  z-index: 5;
+  width: max-content;
+  max-width: min(190px, 45vw);
+  padding: 7px 10px;
+  border: 1px solid color-mix(in srgb, var(--planet-color) 58%, #30435a 42%);
+  border-radius: 5px;
+  background: rgba(9, 19, 32, 0.96);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.42), 0 0 15px color-mix(in srgb, var(--planet-color) 18%, transparent);
+  color: #eef7ff;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  white-space: normal;
+  opacity: 0;
+  pointer-events: auto;
+  transform: translate(-50%, -3px) scale(0.96);
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+.solar-planet:hover .solar-planet-label,
+.solar-planet:focus-visible .solar-planet-label {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.solar-planet:focus-visible .solar-planet-face {
+  outline: 2px solid #e5f7ff;
+  outline-offset: 4px;
+}
+
+.solar-planet:hover .solar-planet-face,
+.solar-planet:focus-visible .solar-planet-face {
+  transform: scale(1.5);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--planet-color) 75%, transparent), 0 0 25px color-mix(in srgb, var(--planet-color) 44%, transparent), inset -3px -3px 6px rgba(3, 11, 21, 0.56);
+}
+
+.solar-planet-upright {
+  position: relative;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  will-change: transform;
+}
+
+@media (max-width: 680px) {
+  .solar-ring-near { --ring-size: 180px; }
+  .solar-ring-mid { --ring-size: 236px; }
+  .solar-ring-far { --ring-size: 274px; }
+  .solar-orbiting-planet { width: min(var(--orbit-size), 274px); }
+  .solar-planet-label { max-width: min(156px, 42vw); font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solar-planet-label { transition: none; }
+  .solar-planet-face { transition: none; }
+}

@@ -7,6 +7,7 @@ import FounderSection from './components/FounderSection.jsx';
 import ProjectCard from './components/ProjectCard.jsx';
 import WhatsAppButton from './components/WhatsAppButton.jsx';
 import LanguageSelector from './components/LanguageSelector.jsx';
+import HeroSolarSystem from './components/HeroSolarSystem.jsx';
 import { useI18n } from './i18n/I18nProvider.jsx';
 
 const nav = [['home', '#inicio'], ['services', '#servicios'], ['about', '#nosotros'], ['projects', '#proyectos'], ['contact', '#contacto']];
@@ -39,11 +40,8 @@ export default function App() {
         <p className="hero-description">{t('hero.description')}</p>
         <div className="hero-actions"><a className="button button-primary" href="#servicios">{t('actions.explore')} <ArrowDownRight size={18} /></a><a className="button button-quiet" href="#contacto">{t('actions.talkProject')} <ArrowRight size={17} /></a></div>
         <div className="hero-note"><span className="note-line" /> {t('hero.note')}</div></div>
-        <div className="hero-visual" aria-label={t('hero.artLabel')} role="img"><div className="visual-orbit orbit-one"/><div className="visual-orbit orbit-two"/>
-          <div className="visual-core"><span className="core-symbol">C<span>.</span></span><span className="core-caption">CERTECH SYSTEMS</span></div>
-          <div className="visual-node node-web"><Code2 /><span>{t('hero.web')}</span></div><div className="visual-node node-ai"><Bot /><span>{t('hero.ai')}</span></div>
-          <div className="visual-node node-data"><Layers3 /><span>{t('hero.data')}</span></div><div className="visual-node node-secure"><ShieldCheck /><span>{t('hero.security')}</span></div><span className="visual-dot dot-a"/><span className="visual-dot dot-b"/>
-        </div></div><div className="container hero-bottom"><span>{t('hero.bottomTitle')}</span><span className="hero-bottom-line"/><span>{t('hero.bottomStages')}</span></div>
+        <HeroSolarSystem />
+      </div><div className="container hero-bottom"><span>{t('hero.bottomTitle')}</span><span className="hero-bottom-line"/><span>{t('hero.bottomStages')}</span></div>
       </section>
       <section className="services-section section" id="servicios"><div className="container"><div className="section-heading"><div><p className="eyebrow">{t('services.eyebrow')}</p><h2>{t('services.title')}<br /><span>{t('services.titleAccent')}</span></h2></div><p className="section-intro">{t('services.intro')}</p></div>
         <div className="service-grid">{services.map(({ value, icon: Icon, slug, featured }, index) => <article className={`service-card ${featured ? 'featured' : ''}`} id={`servicio-${slug}`} key={slug}>
