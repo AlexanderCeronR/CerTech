@@ -29,6 +29,11 @@ public class ApiExceptionHandler {
         return ResponseEntity.badRequest().body(Map.of("message", "El formato de la solicitud no es válido."));
     }
 
+    @ExceptionHandler(org.springframework.web.server.ResponseStatusException.class)
+    public ResponseEntity<Map<String,String>> handleStatus(org.springframework.web.server.ResponseStatusException ex) {
+        return ResponseEntity.status(ex.getStatusCode()).body(Map.of("message","Request could not be processed."));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleUnexpected(Exception exception) {
         logger.error("Unexpected request failure (exceptionType={})", exception.getClass().getSimpleName());

@@ -32,7 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(apiSecurityHeadersInterceptor()).addPathPatterns("/api/**");
-        registry.addInterceptor(contactRateLimitInterceptor()).addPathPatterns("/api/contacto");
+        registry.addInterceptor(contactRateLimitInterceptor()).addPathPatterns("/api/contacto", "/api/cotizaciones");
     }
 
     @Override

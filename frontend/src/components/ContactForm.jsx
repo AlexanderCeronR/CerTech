@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
-import { services, budgets } from '../data/site.js';
+import { services } from '../data/site.js';
 import { submitContactRequest } from '../services/contactService.js';
 import { useI18n } from '../i18n/I18nProvider.jsx';
 import { contactFeedback, invalidFields } from '../i18n/contactFeedback.js';
@@ -53,7 +53,6 @@ export default function ContactForm({ selectedService = '' }) {
       <Field {...field('correo')}><input {...fieldProps('correo')} type="email" autoComplete="email" maxLength="180" required placeholder={t('form.emailPlaceholder')} /></Field>
       <Field {...field('empresa', true)}><input {...fieldProps('empresa')} autoComplete="organization" maxLength="140" placeholder={t('form.companyPlaceholder')} /></Field>
       <Field {...field('servicio')}><select {...fieldProps('servicio')} value={service} onChange={event => setService(event.target.value)} required><option value="" disabled>{t('form.servicePlaceholder')}</option>{services.map(({ value, slug }) => <option key={slug} value={value}>{t(`services.${slug}.title`)}</option>)}</select></Field>
-      <Field {...field('presupuesto', true)}><select {...fieldProps('presupuesto')} defaultValue="">{budgets.map(({ key, value }) => <option key={key} value={value}>{t(`form.budget.${key}`)}</option>)}</select></Field>
       <Field {...field('descripcion')} full><textarea {...fieldProps('descripcion')} rows="5" minLength="10" maxLength="3000" required placeholder={t('form.descriptionPlaceholder')} /></Field>
     </div>
     <label className="privacy-check"><input {...fieldProps('aceptaPrivacidad')} type="checkbox" required /><span>{t('form.privacy')}</span></label>

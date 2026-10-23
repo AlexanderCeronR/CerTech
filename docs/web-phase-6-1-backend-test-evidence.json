@@ -1,0 +1,93 @@
+[
+  {
+    "name": "com.certech.config.EmbeddedHttpLimitsTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.config.ProductionProfileHttpLimitsTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.config.RequestBodyLimitFilterTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.controller.ContactoControllerTest",
+    "tests": "10",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.dto.SolicitudContactoRequestTest",
+    "tests": "2",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.notification.ContactEmailTest",
+    "tests": "6",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.notification.ContactOutboxIntegrationTest",
+    "tests": "9",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.notification.EnabledNotificationIntegrationTest",
+    "tests": "1",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.notification.SmtpTransportGuardTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.quote.QuoteIntegrationTest",
+    "tests": "11",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.quote.QuoteLimitsTest",
+    "tests": "1",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.quote.QuoteSmtpTransportTest",
+    "tests": "2",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.certech.service.SolicitudContactoServiceTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  }
+]

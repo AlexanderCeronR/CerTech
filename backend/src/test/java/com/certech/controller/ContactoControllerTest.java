@@ -25,11 +25,65 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
-@WebMvcTest(ContactoController.class)
+@WebMvcTest(controllers = ContactoController.class, properties = "app.contact.rate-limit.max-requests=100")
 @Import({ApiExceptionHandler.class, WebConfig.class, ContactoControllerTest.FakeServiceConfiguration.class})
 class ContactoControllerTest {
     @Autowired private MockMvc mvc;
     @Autowired private FakeService service;
+
+    @Test
+    void acceptsMaximumLengthFormFieldsAndUnicodeWithinTheBodyLimit() throws Exception {
+        service.reset();
+        String json = new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(
+                new SolicitudContactoRequest("N".repeat(120), "ada@example.com", "E".repeat(140),
+                        "Desarrollo Web", "P".repeat(80), "á".repeat(3000), true));
+        mvc.perform(post("/api/contacto").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isCreated());
+        org.junit.jupiter.api.Assertions.assertEquals(1, service.calls);
+    }
+
+    @Test
+    void oversizedBodyIsRejectedBeforePersistence() throws Exception {
+        service.reset();
+        mvc.perform(post("/api/contacto").contentType(MediaType.APPLICATION_JSON)
+                        .content("x".repeat(16_385)))
+                .andExpect(status().isPayloadTooLarge());
+        org.junit.jupiter.api.Assertions.assertEquals(0, service.calls);
+    }
+
+    @Test
+    void malformedJsonDoesNotReachPersistence() throws Exception {
+        service.reset();
+        mvc.perform(post("/api/contacto").contentType(MediaType.APPLICATION_JSON).content("{"))
+                .andExpect(status().isBadRequest());
+        org.junit.jupiter.api.Assertions.assertEquals(0, service.calls);
+    }
+
+    @Test
+    void allowsPreflightFromConfiguredLocalOrigin() throws Exception {
+        mvc.perform(options("/api/contacto").header("Origin", "http://localhost:5173")
+                        .header("Access-Control-Request-Method", "POST")
+                        .header("Access-Control-Request-Headers", "Content-Type"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:5173"));
+    }
+
+    @Test
+    void spoofedForwardingHeadersDoNotCreateNewRateLimitBuckets() throws Exception {
+        ContactRateLimitInterceptor limiter = new ContactRateLimitInterceptor(1, 60);
+        MockHttpServletRequest request = new MockHttpServletRequest("POST", "/api/contacto");
+        request.setRemoteAddr("192.0.2.10");
+        request.addHeader("X-Forwarded-For", "198.51.100.1");
+        org.junit.jupiter.api.Assertions.assertTrue(limiter.preHandle(request, new MockHttpServletResponse(), new Object()));
+        request.removeHeader("X-Forwarded-For");
+        request.addHeader("X-Forwarded-For", "198.51.100.2");
+        request.addHeader("Forwarded", "for=198.51.100.3;proto=https");
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        org.junit.jupiter.api.Assertions.assertFalse(limiter.preHandle(request, response, new Object()));
+        org.junit.jupiter.api.Assertions.assertEquals(429, response.getStatus());
+        request.setRemoteAddr("192.0.2.11");
+        org.junit.jupiter.api.Assertions.assertTrue(limiter.preHandle(request, new MockHttpServletResponse(), new Object()));
+    }
 
     @Test
     void returns201WhenTheRequestHasBeenPersisted() throws Exception {
@@ -96,7 +150,7 @@ class ContactoControllerTest {
 
     static class FakeService extends SolicitudContactoService {
         private int calls;
-        FakeService() { super(solicitud -> solicitud); }
+        FakeService() { super(solicitud -> solicitud, org.mockito.Mockito.mock(com.certech.notification.ContactNotificationOutbox.class)); }
         @Override public SolicitudContactoResponse crear(SolicitudContactoRequest request) {
             calls++;
             if (request.nombre().equals("Trigger Failure")) throw new IllegalStateException("database unavailable");

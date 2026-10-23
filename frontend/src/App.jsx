@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowDownRight, ArrowRight, Menu, X, Workflow, Bot, Cable, FileSearch, Check, Sparkles, Code2, ShieldCheck, Layers3, HeartHandshake, ChevronRight } from 'lucide-react';
 import { services, projects } from './data/site.js';
 import ContactForm from './components/ContactForm.jsx';
+import QuoteWizard from './components/QuoteWizard.jsx';
 import FounderSection from './components/FounderSection.jsx';
 import ProjectCard from './components/ProjectCard.jsx';
 import WhatsAppButton from './components/WhatsAppButton.jsx';
@@ -29,7 +30,7 @@ export default function App() {
       <button className="menu-toggle" aria-label={t(menuOpen ? 'nav.close' : 'nav.open')} aria-expanded={menuOpen} aria-controls="main-nav" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
       <nav id="main-nav" className={menuOpen ? 'main-nav open' : 'main-nav'} aria-label={t('nav.label')}>
         {nav.map(([key, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{t(`nav.${key}`)}</a>)}
-        <a className="nav-cta" href="#contacto" onClick={() => setMenuOpen(false)}>{t('actions.quote')} <ArrowRight size={15} /></a>
+        <a className="nav-cta" href="#cotizacion" onClick={() => setMenuOpen(false)}>{t('actions.quote')} <ArrowRight size={15} /></a>
       </nav>
     </div></header>
     <main>
@@ -67,7 +68,8 @@ export default function App() {
         <div className="methodology"><div className="method-title"><p className="eyebrow">{t('method.eyebrow')}</p><h3>{t('method.title')}</h3></div>{methods.map((key, i) => <article className="method-step" key={key}><span>0{i + 1}</span><h4>{t(`method.${key}.title`)}</h4><p>{t(`method.${key}.body`)}</p></article>)}</div>
       </div></section>
       <section className="projects-section section" id="proyectos"><div className="container"><div className="projects-heading"><div><p className="eyebrow">{t('projects.eyebrow')}</p><h2>{t('projects.title')}</h2></div><p>{t('projects.intro')}</p></div><div className="project-grid">{projects.map(project => <ProjectCard project={project} key={project.name} />)}</div></div></section>
-      <section className="cta-band"><div className="container cta-content"><div><p className="eyebrow">{t('cta.eyebrow')}</p><h2>{t('cta.title')}<br />{t('cta.titleEnd')}</h2><p>{t('cta.description')}</p></div><a href="#contacto" className="button button-light">{t('actions.quote')} <ArrowRight size={17}/></a><div className="cta-orbit" aria-hidden="true"/></div></section>
+      <section className="cta-band"><div className="container cta-content"><div><p className="eyebrow">{t('cta.eyebrow')}</p><h2>{t('cta.title')}<br />{t('cta.titleEnd')}</h2><p>{t('cta.description')}</p></div><a href="#cotizacion" className="button button-light">{t('actions.quote')} <ArrowRight size={17}/></a><div className="cta-orbit" aria-hidden="true"/></div></section>
+      <QuoteWizard />
       <section className="contact-section section" id="contacto"><div className="container contact-layout"><div className="contact-copy"><p className="eyebrow">{t('contact.eyebrow')}</p><h2>{t('contact.title')}<br />{t('contact.titleMiddle')} <span>{t('contact.titleAccent')}</span></h2><p>{t('contact.description')}</p><div className="contact-aside"><span className="aside-icon"><HeartHandshake /></span><div><b>{t('contact.asideTitle')}</b><p>{t('contact.asideBody')}</p></div></div></div>
         <div className="contact-form-wrap"><h3>{t('contact.formTitle')}</h3><p>{t('contact.required')}</p><ContactForm key={serviceChoice} selectedService={serviceChoice}/></div>
       </div></section>

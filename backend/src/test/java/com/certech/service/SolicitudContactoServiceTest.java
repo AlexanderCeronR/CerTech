@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 class SolicitudContactoServiceTest {
     private SolicitudContacto saved;
     private final SolicitudContactoStore repository = solicitud -> { saved = solicitud; return solicitud; };
-    private final SolicitudContactoService service = new SolicitudContactoService(repository);
+    private final SolicitudContactoService service = new SolicitudContactoService(repository, org.mockito.Mockito.mock(com.certech.notification.ContactNotificationOutbox.class));
 
     @Test
     void savesTheRequestAndReturnsOnlyThePublicConfirmationFields() {
@@ -35,7 +35,7 @@ class SolicitudContactoServiceTest {
     void propagatesPersistenceFailureSoTheControllerCannotReturnCreated() {
         SolicitudContactoService failingService = new SolicitudContactoService(solicitud -> {
             throw new IllegalStateException("database unavailable");
-        });
+        }, org.mockito.Mockito.mock(com.certech.notification.ContactNotificationOutbox.class));
         assertThrows(IllegalStateException.class, () -> failingService.crear(new SolicitudContactoRequest(
                 "Ada Lovelace", "ada@example.com", null, "Desarrollo Web", null,
                 "Necesito una aplicación web.", true)));

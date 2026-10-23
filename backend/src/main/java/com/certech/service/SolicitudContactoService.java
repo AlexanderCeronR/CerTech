@@ -6,12 +6,16 @@ import com.certech.dto.SolicitudContactoResponse;
 import com.certech.entity.SolicitudContacto;
 import com.certech.repository.SolicitudContactoStore;
 import org.springframework.stereotype.Service;
+import com.certech.notification.ContactNotificationOutbox;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SolicitudContactoService {
     private final SolicitudContactoStore repository;
-    public SolicitudContactoService(SolicitudContactoStore repository) { this.repository = repository; }
+    private final ContactNotificationOutbox notifications;
+    public SolicitudContactoService(SolicitudContactoStore repository, ContactNotificationOutbox notifications) {
+        this.repository = repository; this.notifications = notifications;
+    }
 
     @Transactional
     public SolicitudContactoResponse crear(SolicitudContactoRequest request) {
@@ -24,6 +28,7 @@ public class SolicitudContactoService {
                 request.servicio().trim(), cleanOptional(request.presupuesto()), request.descripcion().trim(),
                 acceptedAt, "NUEVA", true, acceptedAt);
         SolicitudContacto saved = repository.save(solicitud);
+        notifications.enqueue(saved.getId());
         return new SolicitudContactoResponse(saved.getId(), saved.getServicio(), saved.getFechaCreacion());
     }
 
