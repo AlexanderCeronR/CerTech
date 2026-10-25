@@ -16,9 +16,8 @@ export default function HeroSolarSystem() {
   const focusedPlanets = useRef(new Set());
 
   useEffect(() => {
-    const initialAngles = [...orbitalAngles];
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      initialAngles.forEach((angle, index) => {
+      orbitalAngles.forEach((angle, index) => {
         if (orbitRefs.current[index]) {
           orbitRefs.current[index].style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
         }
@@ -39,7 +38,7 @@ export default function HeroSolarSystem() {
       previousTime = now;
       const isPaused = hoveredPlanets.current.size > 0 || focusedPlanets.current.size > 0;
       const targetSpeed = isPaused ? 0 : 1;
-      const easing = 1 - Math.exp(-delta / 460);
+      const easing = 1 - Math.exp(-delta / 760);
       speed += (targetSpeed - speed) * easing;
       if (isPaused && speed < 0.001) speed = 0;
 
