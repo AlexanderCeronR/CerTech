@@ -3,10 +3,8 @@ import './HeroSolarSystem.css';
 import { services } from '../data/site.js';
 import { useI18n } from '../i18n/I18nProvider.jsx';
 
-const orbitalSizes = [230, 290, 350, 410, 290, 350, 410];
 const orbitalPeriods = [14, 19, 25, 31, 22, 28, 17];
 const orbitalAngles = [0, 51, 103, 154, 206, 257, 309];
-const planetColors = ['#63d5ff', '#f5bf54', '#a895ff', '#5dd7b2', '#f18fb0', '#72aaff', '#c4dc75'];
 
 export default function HeroSolarSystem() {
   const { t } = useI18n();
@@ -16,16 +14,27 @@ export default function HeroSolarSystem() {
   const focusedPlanets = useRef(new Set());
 
   useEffect(() => {
+    const animations = orbitalAngles.map((angle, index) => {
+      const duration = orbitalPeriods[index] * 1000;
+      const orbitAnimation = orbitRefs.current[index].animate([
+        { transform: `translate(-50%, -50%) rotate(${angle}deg)` },
+        { transform: `translate(-50%, -50%) rotate(${angle + 360}deg)` },
+      ], { duration, iterations: Infinity, easing: 'linear', fill: 'both' });
+      const uprightAnimation = uprightRefs.current[index].animate([
+        { transform: `rotate(${-angle}deg)` },
+        { transform: `rotate(${-angle - 360}deg)` },
+      ], { duration, iterations: Infinity, easing: 'linear', fill: 'both' });
+      orbitAnimation.pause();
+      uprightAnimation.pause();
+      orbitAnimation.currentTime = 0;
+      uprightAnimation.currentTime = 0;
+      return { orbitAnimation, uprightAnimation };
+    });
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      orbitalAngles.forEach((angle, index) => {
-        if (orbitRefs.current[index]) {
-          orbitRefs.current[index].style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-        }
-        if (uprightRefs.current[index]) {
-          uprightRefs.current[index].style.transform = `rotate(${-angle}deg)`;
-        }
+      return () => animations.forEach(({ orbitAnimation, uprightAnimation }) => {
+        orbitAnimation.cancel();
+        uprightAnimation.cancel();
       });
-      return undefined;
     }
 
     let frameId;
@@ -45,19 +54,23 @@ export default function HeroSolarSystem() {
       angles.forEach((angle, index) => {
         const nextAngle = angle + (360 / orbitalPeriods[index]) * (delta / 1000) * speed;
         angles[index] = nextAngle;
-        if (orbitRefs.current[index]) {
-          orbitRefs.current[index].style.transform = `translate(-50%, -50%) rotate(${nextAngle}deg)`;
-        }
-        if (uprightRefs.current[index]) {
-          uprightRefs.current[index].style.transform = `rotate(${-nextAngle}deg)`;
-        }
+        const elapsedRotation = nextAngle - orbitalAngles[index];
+        const currentTime = (elapsedRotation / 360) * orbitalPeriods[index] * 1000;
+        animations[index].orbitAnimation.currentTime = currentTime;
+        animations[index].uprightAnimation.currentTime = currentTime;
       });
 
       frameId = requestAnimationFrame(animate);
     }
 
     frameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frameId);
+    return () => {
+      cancelAnimationFrame(frameId);
+      animations.forEach(({ orbitAnimation, uprightAnimation }) => {
+        orbitAnimation.cancel();
+        uprightAnimation.cancel();
+      });
+    };
   }, []);
 
   function trackInteraction(set, slug, active) {
@@ -81,13 +94,9 @@ export default function HeroSolarSystem() {
 
         return (
           <div
-            className="solar-orbiting-planet"
+            className={`solar-orbiting-planet solar-orbiting-planet-${index + 1}`}
             key={slug}
             ref={element => { orbitRefs.current[index] = element; }}
-            style={{
-              '--orbit-size': `${orbitalSizes[index]}px`,
-              '--planet-color': planetColors[index],
-            }}
           >
             <span
               className="solar-planet"

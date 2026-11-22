@@ -73,7 +73,7 @@ export default function App() {
       </div></section>
     </main>
     <footer className="site-footer"><div className="container"><div className="footer-main"><div className="footer-brand"><Logo /><p>{t('footer.description')}</p></div><div className="footer-col"><b>{t('footer.explore')}</b>{nav.map(([key, href]) => <a href={href} key={href}>{t(`nav.${key}`)}</a>)}</div><div className="footer-col footer-services"><b>{t('nav.services')}</b>{services.map(({ slug }) => <a href={`#servicio-${slug}`} key={slug}>{t(`services.${slug}.title`)}</a>)}</div></div>
-      <details className="privacy-note" id="privacidad"><summary>{t('privacy.summary')}</summary><p>{t('privacy.body')}</p></details><div className="footer-bottom"><span>© {new Date().getFullYear()} CerTech. {t('footer.rights')}</span><a href="#privacidad">{t('privacy.link')}</a><span className="footer-location">{t('footer.location')}</span></div>
+      <details className="privacy-note" id="seguridad"><summary>{t('security.summary')}</summary><p>{t('security.body')}</p></details><details className="privacy-note" id="privacidad"><summary>{t('privacy.summary')}</summary><p>{t('privacy.body')}</p><p>{t('privacy.contactLead')} <a href={`mailto:${t('privacy.contactEmail')}`}>{t('privacy.contactEmail')}</a> {t('privacy.contactTemporary')}</p></details><div className="footer-bottom"><span>© {new Date().getFullYear()} CerTech. {t('footer.rights')}</span><a href="#privacidad">{t('privacy.link')}</a><span className="footer-location">{t('footer.location')}</span></div>
       <p className="development-credit">{t('footer.development')} <a href="https://moreltech.dev" target="_blank" rel="noopener noreferrer">{t('footer.developmentBrand')}</a></p>
     </div></footer>
     <WhatsAppButton />

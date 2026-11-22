@@ -56,6 +56,14 @@
   pointer-events: none;
 }
 
+.solar-orbiting-planet-1 { --orbit-size: 230px; --planet-color: #63d5ff; }
+.solar-orbiting-planet-2 { --orbit-size: 290px; --planet-color: #f5bf54; }
+.solar-orbiting-planet-3 { --orbit-size: 350px; --planet-color: #a895ff; }
+.solar-orbiting-planet-4 { --orbit-size: 410px; --planet-color: #5dd7b2; }
+.solar-orbiting-planet-5 { --orbit-size: 290px; --planet-color: #f18fb0; }
+.solar-orbiting-planet-6 { --orbit-size: 350px; --planet-color: #72aaff; }
+.solar-orbiting-planet-7 { --orbit-size: 410px; --planet-color: #c4dc75; }
+
 .solar-planet {
   position: absolute;
   top: 0;

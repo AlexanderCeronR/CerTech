@@ -9,7 +9,7 @@ export default function FounderSection() {
   return <section className="founder-section" id="fundador" aria-labelledby="founder-heading">
     <div className="container founder-layout">
       <figure className="founder-portrait">
-        <img src={portrait} srcSet={`${portraitSmall} 480w, ${portrait} 960w`} sizes="(max-width: 680px) 82vw, 340px" width="960" height="1280" loading="lazy" decoding="async" alt={t('founder.alt')} />
+        <img src={portrait} srcSet={`${portraitSmall} 480w, ${portrait} 960w`} sizes="(max-width: 680px) 82vw, 340px" width="960" height="1280" loading="eager" fetchPriority="high" decoding="async" alt={t('founder.alt')} />
       </figure>
       <div className="founder-copy">
         <p className="eyebrow">{t('founder.eyebrow')}</p>
